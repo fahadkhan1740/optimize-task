@@ -18,9 +18,18 @@ class ProviderSeeder extends Seeder
 
         DB::table('providers')->insert([
             [
-                'name' => 'Google'
+                'name' => 'Google',
+                'description' => '
+                1. .jpg: Must be in aspect ratio 4:3 and < 2 mb size
+                2. .mp4: < 1 minutes long
+                3. .mp3: < 30 seconds long and < 5mb size
+                '
             ], [
-                'name' => 'Snapchat'
+                'name' => 'Snapchat',
+                'description' => '
+                1. .jpg, .gif: Must be in aspect ratio 16:9 and < 5mb in size
+                2. .mp4, .mov: < 50mb in size and < 5 minutes long
+                '
             ]
         ]);
     }
