@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ImageFormRequest;
 use App\Models\Image;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,7 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImageFormRequest $request)
     {
         //
     }

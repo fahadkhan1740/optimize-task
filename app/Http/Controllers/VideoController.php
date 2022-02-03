@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VideoFormRequest;
 use App\Models\Video;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,7 @@ class VideoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VideoFormRequest $request)
     {
         //
     }

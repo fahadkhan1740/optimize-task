@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Constants\Constant;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ImageFormRequest extends FormRequest
@@ -23,8 +24,22 @@ class ImageFormRequest extends FormRequest
      */
     public function rules()
     {
+        $imageFileRules = [
+            'required'
+        ];
+
+        if (request()->input('provider') === Constant::GOOGLE) {
+            $imageFileRules[] = 'mimes:jpg';
+            $imageFileRules[] = 'size:2000';
+            // TODO: add aspect ratio check
+        } else if (request()->input('provider') === Constant::SNAPCHAT) {
+            $imageFileRules[] = 'mimes:jpg,gif';
+            $imageFileRules[] = 'size:5000';
+            // TODO: add aspect ratio check
+        }
+
         return [
-            //
+            'image_file' => $imageFileRules
         ];
     }
 }
