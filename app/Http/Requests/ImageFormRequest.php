@@ -39,6 +39,7 @@ class ImageFormRequest extends FormRequest
         }
 
         return [
+            'provider' => ['required', 'exists:App\Models\Provider,id'],
             'image_file' => $imageFileRules
         ];
     }

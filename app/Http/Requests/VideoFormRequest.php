@@ -38,6 +38,7 @@ class VideoFormRequest extends FormRequest
         }
 
         return [
+            'provider' => ['required', 'exists:App\Models\Provider,id'],
             'video_file' => $videoFileRules
         ];
     }
