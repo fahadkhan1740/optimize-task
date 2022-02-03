@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageFormRequest;
 use App\Models\Image;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
@@ -11,11 +12,15 @@ class ImageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        return response()->json([
+            'status' => true,
+            'message' => 'Images fetched successfully',
+            'data' => Image::all()
+        ]);
     }
 
     /**

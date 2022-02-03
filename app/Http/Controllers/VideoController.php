@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\VideoFormRequest;
 use App\Models\Video;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class VideoController extends Controller
@@ -11,11 +12,15 @@ class VideoController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        return response()->json([
+            'status' => true,
+            'message' => 'Videos fetched successfully',
+            'data' => Video::all()
+        ]);
     }
 
     /**
