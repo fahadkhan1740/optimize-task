@@ -19,7 +19,7 @@ class VideoController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Videos fetched successfully',
-            'data' => Video::all()
+            'data' => Video::paginate()
         ]);
     }
 

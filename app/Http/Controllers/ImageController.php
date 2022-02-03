@@ -19,7 +19,7 @@ class ImageController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Images fetched successfully',
-            'data' => Image::all()
+            'data' => Image::paginate()
         ]);
     }
 

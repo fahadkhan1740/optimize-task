@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\VideoController;
 use Illuminate\Http\Request;
@@ -24,3 +25,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('providers', ProviderController::class);
 Route::resource('images', ImageController::class);
 Route::resource('videos', VideoController::class);
+
+Route::get('media', MediaController::class);
