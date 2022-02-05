@@ -25,7 +25,11 @@ php artisan migrate
 php artisan db:seed ProviderSeeder
 ```
 5. Update the `APP_URL` in the `.env` file as `https://localhost:8000`
-6. Run the application using the following command
+6. Create symlinks for the file uploads
+```
+php artisan storage:link
+```
+7. Run the application using the following command
 ```
 php artisan serve
 ```
