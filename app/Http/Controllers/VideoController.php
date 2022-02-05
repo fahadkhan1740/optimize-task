@@ -33,7 +33,7 @@ class VideoController extends Controller
      */
     public function store(VideoFormRequest $request): JsonResponse
     {
-        $path = $request->file('video_file')->store('videos');
+        $path = $request->file('video_file')->store('public/images');
 
         $video = new Video();
         $video->name = $request->input('name');

@@ -33,7 +33,7 @@ class ImageController extends Controller
      */
     public function store(ImageFormRequest $request): JsonResponse
     {
-        $path = $request->file('image_file')->store('images');
+        $path = $request->file('image_file')->store('public/images');
 
         $image = new Image();
         $image->name = $request->input('name');

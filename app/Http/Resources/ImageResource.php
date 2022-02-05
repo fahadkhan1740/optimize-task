@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class ImageResource extends JsonResource
 {
@@ -18,7 +19,7 @@ class ImageResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'provider' => $this->provider->name,
-            'image_file' => asset('storage/'.$this->image_file),
+            'image_file' => config('app.url').Storage::url($this->image_file),
             'created_at' => $this->created_at
         ];
     }
