@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageFormRequest;
+use App\Http\Resources\ImageResource;
 use App\Models\Image;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\JsonResponse;
@@ -37,13 +38,13 @@ class ImageController extends Controller
         $image = new Image();
         $image->name = $request->input('name');
         $image->provider_id = $request->input('provider');
-        $image->image_file = $path; // TODO: To Create file object here
+        $image->image_file = $path;
         $image->save();
 
         return response()->json([
             'status' => true,
             'message' => 'Image saved successfully',
-            'data' => $image
+            'data' => new ImageResource($image)
         ], Response::HTTP_CREATED);
     }
 }
