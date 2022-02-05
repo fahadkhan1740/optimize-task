@@ -32,7 +32,7 @@ class ImageFormRequest extends FormRequest
             'image_file' => [
                 'bail',
                 'required',
-                ...explode(';', Provider::find(request()->input('provider'))->toArray()['rules'])
+                ...explode(';', Provider::find(request()->input('provider'))->toArray()['image_rules'])
             ] // new custom method for rules
         ];
     }
