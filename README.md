@@ -38,7 +38,7 @@ php artisan serve
 
 #### API Endpoints
 
-Please find the Postman Collection attached [here](https://www.getpostman.com/collections/21eee7fef27a14e5a4c7). 
+Please find the Postman Collection attached [here](https://github.com/fahadkhan1740/optimize-task/files/8008509/OptimizeApp.Task.postman_collection.json.zip). 
 
 #### Unit Test
 
