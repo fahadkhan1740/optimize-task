@@ -27,12 +27,12 @@ class VideoFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['bail', 'required', 'string'],
             'provider' => ['bail', 'required', 'exists:App\Models\Provider,id'],
+            'name' => ['bail', 'required', 'string'],
             'video_file' => [
                 'bail',
                 'required',
-                json_decode(Provider::find(request()->input('provider'))->rules, false, 512, JSON_THROW_ON_ERROR)
+                ...explode(';', Provider::findOrFail(request()->input('provider'))->toArray()['rules'])
             ] // new custom method for rules
         ];
     }

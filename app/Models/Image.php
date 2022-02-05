@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @method static paginate()
+ * @property mixed $name
+ * @property mixed $provider_id
+ * @property mixed $image_file
  */
 class Image extends Model
 {

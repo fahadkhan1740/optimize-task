@@ -6,6 +6,7 @@ use App\Http\Requests\VideoFormRequest;
 use App\Models\Video;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class VideoController extends Controller
 {
@@ -24,68 +25,25 @@ class VideoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  VideoFormRequest  $request
+     * @return JsonResponse
      */
-    public function store(VideoFormRequest $request)
+    public function store(VideoFormRequest $request): JsonResponse
     {
-        //
-    }
+        $path = $request->file('video_file')->store('videos');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Video  $video
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Video $video)
-    {
-        //
-    }
+        $video = new Video();
+        $video->name = $request->input('name');
+        $video->provider_id = $request->input('provider');
+        $video->video_file = $request->input('video_file'); // TODO: To Create file object here
+        $video->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Video  $video
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Video $video)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Video  $video
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Video $video)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Video  $video
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Video $video)
-    {
-        //
+        return response()->json([
+            'status' => true,
+            'message' => 'Video saved successfully',
+            'data' => $video
+        ], Response::HTTP_CREATED);
     }
 }

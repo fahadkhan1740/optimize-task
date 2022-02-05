@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @method static paginate()
+ * @property mixed $name
+ * @property mixed $provider_id
+ * @property mixed $video_file
  */
 class Video extends Model
 {
