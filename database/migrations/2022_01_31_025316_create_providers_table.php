@@ -17,6 +17,7 @@ class CreateProvidersTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
+            $table->text('rules');
             $table->timestamps();
         });
     }

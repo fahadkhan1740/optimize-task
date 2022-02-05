@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Constants\Constant;
+use App\Models\Provider;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ImageFormRequest extends FormRequest
@@ -21,27 +22,18 @@ class ImageFormRequest extends FormRequest
      * Get the validation rules that apply to the request.
      *
      * @return array
+     * @throws \JsonException
      */
     public function rules()
     {
-//        $imageFileRules = [
-//            'required'
-//        ];
-//
-//        if (request()->input('provider') === Constant::GOOGLE) {
-//            $imageFileRules[] = 'mimes:jpg';
-//            $imageFileRules[] = 'size:2000';
-//            // TODO: add aspect ratio check
-//        } else if (request()->input('provider') === Constant::SNAPCHAT) {
-//            $imageFileRules[] = 'mimes:jpg,gif';
-//            $imageFileRules[] = 'size:5000';
-//            // TODO: add aspect ratio check
-//        }
-
         return [
             'name' => ['bail', 'required', 'string'],
             'provider' => ['bail', 'required', 'exists:App\Models\Provider,id'],
-            'image_file' => ['bail', 'required'] // new custom method for rules
+            'image_file' => [
+                'bail',
+                'required',
+                json_decode(Provider::find(request()->input('provider'))->rules, false, 512, JSON_THROW_ON_ERROR)
+            ] // new custom method for rules
         ];
     }
 }

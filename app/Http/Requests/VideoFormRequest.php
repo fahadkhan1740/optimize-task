@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Constants\Constant;
+use App\Models\Provider;
 use Illuminate\Foundation\Http\FormRequest;
 
 class VideoFormRequest extends FormRequest
@@ -21,26 +22,18 @@ class VideoFormRequest extends FormRequest
      * Get the validation rules that apply to the request.
      *
      * @return array
+     * @throws \JsonException
      */
     public function rules()
     {
-//        $videoFileRules = [
-//            'required'
-//        ];
-//
-//        if (request()->input('provider') === Constant::GOOGLE) {
-//            $videoFileRules[] = 'mimes:mp4';
-//            // TODO: add duration check
-//        } else if (request()->input('provider') === Constant::SNAPCHAT) {
-//            $videoFileRules[] = 'mimes:mp4,mov';
-//            $videoFileRules[] = 'size:50000';
-//            // TODO: add duration check
-//        }
-
         return [
             'name' => ['bail', 'required', 'string'],
             'provider' => ['bail', 'required', 'exists:App\Models\Provider,id'],
-            'video_file' => ['bail', 'required'] // new custom method for rules
+            'video_file' => [
+                'bail',
+                'required',
+                json_decode(Provider::find(request()->input('provider'))->rules, false, 512, JSON_THROW_ON_ERROR)
+            ] // new custom method for rules
         ];
     }
 }
