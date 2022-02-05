@@ -17,7 +17,8 @@ class CreateProvidersTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->text('rules');
+            $table->text('image_rules')->nullable();
+            $table->text('video_rules')->nullable();
             $table->timestamps();
         });
     }
