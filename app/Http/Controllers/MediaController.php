@@ -11,15 +11,22 @@ class MediaController extends Controller
 {
     public function __invoke(): JsonResponse
     {
-        $images = Image::all();
-        $videos = Video::all();
+        $images = Image::query()
+            ->select('id', 'provider_id', 'image_file', 'created_at')
+            ->with('provider:id,name')
+            ->get();
 
-        $images->merge($videos);
+        $videos = Video::query()
+            ->select('id', 'provider_id', 'video_file', 'created_at')
+            ->with('provider:id,name')
+            ->get();
+
+        $medias = $images->concat($videos);
 
         return response()->json([
             'status' => true,
             'message' => 'All Media files fetched successfully',
-            'data' => $images->all()
+            'data' => $medias->sortByDesc('created_at')->paginate(10)
         ]);
     }
 }
