@@ -24,24 +24,24 @@ class ImageFormRequest extends FormRequest
      */
     public function rules()
     {
-        $imageFileRules = [
-            'required'
-        ];
-
-        if (request()->input('provider') === Constant::GOOGLE) {
-            $imageFileRules[] = 'mimes:jpg';
-            $imageFileRules[] = 'size:2000';
-            // TODO: add aspect ratio check
-        } else if (request()->input('provider') === Constant::SNAPCHAT) {
-            $imageFileRules[] = 'mimes:jpg,gif';
-            $imageFileRules[] = 'size:5000';
-            // TODO: add aspect ratio check
-        }
+//        $imageFileRules = [
+//            'required'
+//        ];
+//
+//        if (request()->input('provider') === Constant::GOOGLE) {
+//            $imageFileRules[] = 'mimes:jpg';
+//            $imageFileRules[] = 'size:2000';
+//            // TODO: add aspect ratio check
+//        } else if (request()->input('provider') === Constant::SNAPCHAT) {
+//            $imageFileRules[] = 'mimes:jpg,gif';
+//            $imageFileRules[] = 'size:5000';
+//            // TODO: add aspect ratio check
+//        }
 
         return [
-            'name' => ['required', 'string'],
-            'provider' => ['required', 'exists:App\Models\Provider,id'],
-            'image_file' => $imageFileRules
+            'name' => ['bail', 'required', 'string'],
+            'provider' => ['bail', 'required', 'exists:App\Models\Provider,id'],
+            'image_file' => ['bail', 'required'] // new custom method for rules
         ];
     }
 }

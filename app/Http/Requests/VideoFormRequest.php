@@ -24,23 +24,23 @@ class VideoFormRequest extends FormRequest
      */
     public function rules()
     {
-        $videoFileRules = [
-            'required'
-        ];
-
-        if (request()->input('provider') === Constant::GOOGLE) {
-            $videoFileRules[] = 'mimes:mp4';
-            // TODO: add duration check
-        } else if (request()->input('provider') === Constant::SNAPCHAT) {
-            $videoFileRules[] = 'mimes:mp4,mov';
-            $videoFileRules[] = 'size:50000';
-            // TODO: add duration check
-        }
+//        $videoFileRules = [
+//            'required'
+//        ];
+//
+//        if (request()->input('provider') === Constant::GOOGLE) {
+//            $videoFileRules[] = 'mimes:mp4';
+//            // TODO: add duration check
+//        } else if (request()->input('provider') === Constant::SNAPCHAT) {
+//            $videoFileRules[] = 'mimes:mp4,mov';
+//            $videoFileRules[] = 'size:50000';
+//            // TODO: add duration check
+//        }
 
         return [
-            'name' => ['required', 'string'],
-            'provider' => ['required', 'exists:App\Models\Provider,id'],
-            'video_file' => $videoFileRules
+            'name' => ['bail', 'required', 'string'],
+            'provider' => ['bail', 'required', 'exists:App\Models\Provider,id'],
+            'video_file' => ['bail', 'required'] // new custom method for rules
         ];
     }
 }
