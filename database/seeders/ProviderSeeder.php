@@ -25,7 +25,7 @@ class ProviderSeeder extends Seeder
                 3. .mp3: < 30 seconds long and < 5mb size
                 ',
                 'image_rules' => 'mimes:jpg;max:2000',
-                'video_rules' => 'mimes:jpg;max:2000'
+                'video_rules' => 'mimes:mp4;video_length:60'
             ], [
                 'name' => 'Snapchat',
                 'description' => '
@@ -33,7 +33,7 @@ class ProviderSeeder extends Seeder
                 2. .mp4, .mov: < 50mb in size and < 5 minutes long
                 ',
                 'image_rules' => 'mimes:jpg,gif;max:5000',
-                'video_rules' => 'mimes:jpg;max:2000'
+                'video_rules' => 'mimes:mp4;max:50000;video_length:300'
             ]
         ]);
     }

@@ -38,7 +38,7 @@ class VideoController extends Controller
         $video = new Video();
         $video->name = $request->input('name');
         $video->provider_id = $request->input('provider');
-        $video->video_file = $request->input('video_file');
+        $video->video_file = $path;
         $video->save();
 
         return response()->json([
